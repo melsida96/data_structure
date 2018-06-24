@@ -29,7 +29,7 @@ class Tree
                  * @name ~bst
                  * @brief The destructor of Tree class.
                  */
-                //~Tree();
+                ~Tree();
 
                 /**
                  * @name new_node
@@ -189,6 +189,15 @@ class Tree
                 *@return The function doesn't return any value.
                 */
                 void print_tree (node* root, int level);
+                
+                /**
+                 * @name delete_tree
+                 * @brief The function deletes the tree.
+                 * @param root is a pointer to node type, which is the root of
+                 * the tree.
+                 * @return Function doesn't return any value.
+                 * */
+                void delete_tree (node* root);
 };
 
 #endif

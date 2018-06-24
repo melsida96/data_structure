@@ -253,5 +253,18 @@ void Tree::print()
         print_tree (root, 0);
 }
 
+void Tree::delete_tree (node* root)
+{
+        if ( root -> right ) {
+                delete_tree (root -> right);
+        }
+        if ( root -> left ) {
+                delete_tree (root -> left);
+        }
+        delete root;
+}
 
-
+Tree::~Tree()
+{
+        delete_tree (root);
+}
