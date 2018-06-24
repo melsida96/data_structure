@@ -8,6 +8,7 @@ class node
                 node* left;
                 node* right;
                 node* parent;
+                node(int value);
                 node();
                 ~node();
 };

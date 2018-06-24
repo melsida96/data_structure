@@ -12,7 +12,6 @@ Tree::Tree(int value)
         root = temp;
 }
 
-
 Tree::Tree()
 {
         root = NULL;
