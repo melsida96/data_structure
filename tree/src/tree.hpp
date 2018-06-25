@@ -198,6 +198,57 @@ class Tree
                  * @return Function doesn't return any value.
                  * */
                 void delete_tree (node* root);
+
+                /**
+                 * @name right_rotation
+                 * @brief The function rotates the tree starting from the given
+                 * node to the right for balanceing the tree.
+                 * @param root is a pointer to node type object, the starting point
+                 * for rotation.
+                 * @return The function returns a pointer to node type object.
+                 */
+                node* right_rotation (node* root);
+
+                /**
+                 * @name left_rotation
+                 * @brief The function rotates the tree starting from the given
+                 * node to the left for balancing the tree.
+                 * @param root is a pointer to node type object, the starting
+                 * point for rotation.
+                 * @return The function returns a pointer to node type object.
+                 * */
+                node* left_rotation (node* root);
+
+                /**
+                 * @name left_right_rotation
+                 * @brief The function rotates the tree starting from the given
+                 * node to the left, then right for balancing the tree.
+                 * @param root is a pointer to node type object, the starting
+                 * point for rotation.
+                 * @return The function returns a pointer to node type object.
+                 * */
+                node* left_right_rotation (node* root);
+
+                /**
+                 * @name right_left_rotation
+                 * @brief The function rotates the tree starting from the given
+                 * node to the right, then left for balancing the tree.
+                 * @param root is a pointer to node type object, the starting
+                 * point for rotation.
+                 * */
+                node* right_left_rotation (node* root);
+                
+                /**
+                 * @name balancing
+                 * @brief The function balances the tree after each indertion.
+                 * @param root is a pointer to node type onject, which is the
+                 * root of the tree.
+                 * @return Function doesn't returns any value.
+                 * */
+                void balancing(node* root);
+
+                void test_balance();
+
 };
 
 #endif

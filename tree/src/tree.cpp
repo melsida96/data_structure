@@ -51,12 +51,15 @@ void Tree::insert(int value)
                 if ( temp -> value < parent_node -> value ) {
                         parent_node -> left = temp;
                         temp -> parent = parent_node;
+                        balancing (root -> left);
                 } else {
                         parent_node -> right = temp;
                         temp -> parent = parent_node;
+                        balancing (root ->left);
                 }
         }
 }
+
 
 void Tree::inorder_print(node* root)
 {
@@ -199,7 +202,7 @@ int Tree::balance_factor(node* node)
                 return 0;
         } else {
                 int balance_factor;
-                balance_factor = height(node -> right) - height(node -> left);
+                balance_factor = height(node -> left) - height(node -> right);
                 return balance_factor;
         }
 }
@@ -218,17 +221,17 @@ bool Tree::is_balanced(node * node)
 bool Tree::inorder_balance(node* root)
 {
         if ( root ) {
-                inorder_balance( root -> left );
+                inorder_balance (root -> left);
                 if ( !is_balanced (root) ) {
                         return false;
                 }
-                inorder_balance( root -> right);
+                inorder_balance (root -> right);
         }
 }
 
 bool Tree::balance()
 {
-        if ( inorder_balance(root) ) {
+        if ( inorder_balance (root) ) {
                 return true;
         } else {
                 return false;
@@ -267,4 +270,81 @@ void Tree::delete_tree (node* root)
 Tree::~Tree()
 {
         delete_tree (root);
+}
+
+node* Tree::right_rotation (node* root)
+{
+        node* pivot = root -> left;
+        pivot -> parent = root -> parent;
+        root -> left = pivot -> right;
+        if ( root -> left != NULL ) {
+                root -> left -> parent = root;
+        }
+        pivot -> right = root;
+        root -> parent = pivot;
+        if ( pivot -> parent != NULL ) {
+                if ( pivot  -> parent -> right == root ) {
+                        pivot -> parent -> right = pivot;
+                } else {
+                        pivot -> parent -> left = pivot;
+                }
+        }
+        return root;
+}
+
+node* Tree::left_rotation (node* root)
+{
+        node* pivot = root -> right;
+        pivot -> parent = root -> parent;
+        root -> right = pivot -> left;
+        if ( root -> right != NULL ) {
+                root -> right -> parent = root;
+        }
+        pivot -> left = root;
+        root -> parent = pivot;
+        if ( pivot -> parent != NULL ) {
+                if ( pivot -> parent -> left == root ) {
+                        pivot -> parent -> left = pivot;
+                } else {
+                        pivot -> parent -> right = pivot;
+                }
+        }
+        return root;
+}
+
+node* Tree::left_right_rotation (node* root)
+{
+        left_rotation (root -> left);   
+        return right_rotation (root);
+} 
+
+node* Tree::right_left_rotation (node* root)
+{
+        right_rotation (root -> right);
+        return left_rotation (root);
+}
+
+void Tree::balancing(node* node)
+{
+        int factor = balance_factor(node);
+        if ( factor < -1 ) {
+                factor = balance_factor(node -> right);
+                if ( factor < 0 ) {
+                        left_rotation (node);
+                } else if ( factor > 0 ) {
+                        right_left_rotation(node);
+                }
+        } else if ( factor > 1 ) {
+                factor = balance_factor(node -> left);
+                if ( factor < 0 ) {
+                        left_right_rotation(node);
+                } else if ( factor > 0 ) {
+                        right_rotation(node);
+                }
+        }
+}
+
+void Tree::test_balance()
+{
+        left_right_rotation(root -> left);
 }
